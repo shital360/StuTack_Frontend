@@ -1,0 +1,136 @@
+/* Page Wrapper */
+.profile-wrapper {
+  min-height: 100vh;
+  background: #f5f6f8;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Header */
+.header {
+  width: 860px;   /* ⬆ bigger */
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 30px;   /* ⬆ bigger */
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 16px;   /* ⬆ bigger */
+  color: #6b7280;
+}
+
+/* Card */
+.profile-card {
+  background: #ffffff;
+  padding: 35px;     /* ⬆ more space */
+  border-radius: 12px;
+  width: 860px;      /* ⬆ bigger */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Top section */
+.top-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  width: 90px;      /* ⬆ bigger */
+  height: 90px;
+  background: #e0ebff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.name {
+  font-size: 24px;   /* ⬆ bigger */
+  font-weight: 600;
+}
+
+.role {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* Section title */
+.section-title {
+  margin: 28px 0 18px;
+  font-size: 18px;   /* ⬆ bigger */
+  font-weight: 600;
+}
+
+/* Info rows */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;         /* ⬆ more spacing */
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.icon {
+  width: 48px;      /* ⬆ bigger */
+  height: 48px;
+  background: #f1f3f5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+small {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+p {
+  font-size: 16px;  /* ⬆ bigger */
+  margin: 4px 0 0;
+}
+
+/* Button */
+.edit-btn {
+  margin-top: 30px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px 24px;   /* ⬆ bigger */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-btn:hover {
+  background: #1e40af;
+}
+
+/* Divider */
+hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .header,
+  .profile-card {
+    width: 100%;
+  }
+}

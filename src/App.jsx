@@ -11,7 +11,8 @@ import Courses from "./Components/Pages/Courses";
 import AddCourse from "./Components/Pages/AddCourse";
 import EditCourse from "./Components/Pages/EditCourse";
 import CourseDetails from "./Components/Pages/CourseDetails";
-import Attendance from "./Components/Pages/Attendance";  // ✅ YO LINE ADD GARNUS
+import Attendance from "./Components/Pages/Attendance";
+import Profile from "./Components/Pages/Profile";  // ✅ YO LINE ADD GARNUS
 
 function App() {
   // 🔹 COURSES STATE HERE
@@ -36,6 +37,7 @@ function App() {
         <Route path="/students" element={<Students />} />
         <Route path="/attendance" element={<Attendance />} />  {/* ✅ YO ROUTE ADD GARNUS */}
         <Route path="/results" element={<Results />} />
+        <Route path="/profile" element={<Profile />} />  {/* ✅ YO ROUTE ADD GARNUS */}
 
         {/* 🔹 COURSES ROUTES WITH PROPS */}
         <Route
