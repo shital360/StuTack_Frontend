@@ -1,0 +1,115 @@
+
+/* ===== FULL PAGE BACKGROUND ===== */
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../../assets/login.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* prevents card from touching screen edges */
+  box-sizing: border-box;
+  overflow-y: auto; /* allows scrolling on small screens */
+}
+
+/* ===== LOGIN CARD ===== */
+.container {
+  width: 360px;
+  max-width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(180, 205, 235, 0.95),
+    rgba(110, 160, 220, 0.95)
+  );
+
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.container button {
+  width: 100%;
+  padding: 12px;
+  background: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.container p {
+  margin-top: 15px;
+  color: white;
+}
+
+.container span {
+  color: yellow;
+  cursor: pointer;
+}
+
+/* ===== PASSWORD EYE ===== */
+.password-box {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  cursor: pointer;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+  .container {
+    width: 300px;
+    padding: 25px;
+  }
+  .container h2 { font-size: 24px; }
+  .container input,
+  .container button { padding: 10px; }
+  .eye-icon { width: 20px; right: 10px; }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 10px;
+    align-items: flex-start; /* moves card slightly up */
+  }
+
+  .container {
+    width: 100%; /* full width on tiny screens */
+    padding: 20px;
+  }
+
+  .container h2 { font-size: 20px; }
+  .container input,
+  .container button { padding: 10px; font-size: 14px; }
+  .container p { font-size: 14px; }
+  .eye-icon { width: 18px; right: 8px; }
+}
