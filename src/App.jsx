@@ -10,21 +10,16 @@ import Results from "./Components/Pages/Results";
 import Courses from "./Components/Pages/Courses";
 import AddCourse from "./Components/Pages/AddCourse";
 import EditCourse from "./Components/Pages/EditCourse";
-import CourseDetails from "./Components/Pages/CourseDetails";
 import Attendance from "./Components/Pages/Attendance";
-import Profile from "./Components/Pages/Profile";  // ✅ YO LINE ADD GARNUS
+import Profile from "./Components/Pages/Profile";
 
 function App() {
-  // 🔹 COURSES STATE HERE
   const [courses, setCourses] = useState([
-    {
-      code: "C101",
-      name: "Mathematics",
-      className: "10",
-      credit: 5,
-      teacher: "Mr. Sharma",
-      status: "Active",
-    },
+    { code: "C101", name: "English", className: "10", teacher: "Mr. Sharma" },
+    { code: "C102", name: "Nepali", className: "10", teacher: "Mrs. Koirala" },
+    { code: "C103", name: "Science", className: "10", teacher: "Mr. Thapa" },
+    { code: "C104", name: "Social", className: "10", teacher: "Ms. Shrestha" },
+    { code: "C105", name: "Mathematics", className: "10", teacher: "Mr. Sharma" },
   ]);
 
   return (
@@ -35,11 +30,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/students" element={<Students />} />
-        <Route path="/attendance" element={<Attendance />} />  {/* ✅ YO ROUTE ADD GARNUS */}
+        <Route path="/attendance" element={<Attendance />} />
         <Route path="/results" element={<Results />} />
-        <Route path="/profile" element={<Profile />} />  {/* ✅ YO ROUTE ADD GARNUS */}
+        <Route path="/profile" element={<Profile />} />
 
-        {/* 🔹 COURSES ROUTES WITH PROPS */}
         <Route
           path="/courses"
           element={<Courses courses={courses} setCourses={setCourses} />}
@@ -51,10 +45,6 @@ function App() {
         <Route
           path="/courses/edit/:code"
           element={<EditCourse courses={courses} setCourses={setCourses} />}
-        />
-        <Route
-          path="/courses/details/:code"
-          element={<CourseDetails courses={courses} />}
         />
       </Routes>
     </BrowserRouter>

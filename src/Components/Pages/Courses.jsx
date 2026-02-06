@@ -1,20 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Courses() {
-  const [courses, setCourses] = useState([
-    {
-      code: "C101",
-      name: "Mathematics",
-      className: "10",
-      credit: 5,
-      teacher: "Mr. Sharma",
-      status: "Active",
-    },
-  ]);
-
+function Courses({ courses, setCourses }) {
   const deleteCourse = (code) => {
-    if (window.confirm("Are you sure you want to delete?")) {
+    if (window.confirm("Are you sure you want to delete this course?")) {
       setCourses(courses.filter((c) => c.code !== code));
     }
   };
@@ -23,7 +11,6 @@ function Courses() {
     <div>
       <h2>Courses</h2>
 
-      {/* Navigate to AddCourse page */}
       <Link to="/courses/add">
         <button>Add Course</button>
       </Link>
@@ -34,9 +21,7 @@ function Courses() {
             <th>Code</th>
             <th>Name</th>
             <th>Class</th>
-            <th>Credit</th>
             <th>Teacher</th>
-            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -47,16 +32,12 @@ function Courses() {
               <td>{c.code}</td>
               <td>{c.name}</td>
               <td>{c.className}</td>
-              <td>{c.credit}</td>
               <td>{c.teacher}</td>
-              <td>{c.status}</td>
               <td>
-                {/* Edit */}
                 <Link to={`/courses/edit/${c.code}`}>
                   <button>Edit</button>
                 </Link>
 
-                {/* Delete */}
                 <button
                   style={{ marginLeft: "5px" }}
                   onClick={() => deleteCourse(c.code)}

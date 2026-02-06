@@ -98,9 +98,9 @@ const Landing = () => {
 
       {/* About Section */}
       <section className="about" id="about">
-        <h2>About SIMS</h2>
+        <h2>About EduTrack</h2>
         <p>
-          SIMS is a centralized student information management system
+          EduTrack is a centralized student information management system
           designed for schools and colleges to manage student records,
           attendance, courses, and results with accuracy and security.
         </p>

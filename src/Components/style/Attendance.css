@@ -1,106 +1,141 @@
-/* ===== GENERAL PAGE STYLING ===== */
-body {
+.attendance-page {
+  padding: 20px 30px;
   font-family: Arial, sans-serif;
-  background-color: #f3f4f6;
-  margin: 0;
-  padding: 0;
+  background: #f9fafb;
 }
 
-.attendance-dashboard {
-  padding: 30px;
-  min-height: 100vh;
-}
-
-/* ===== HEADING ===== */
-.attendance-dashboard h1 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #111827;
-}
-
-/* ===== FILTERS ===== */
-.filters {
+/* ===== Top Bar ===== */
+.top-bar {
   display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.filters input {
+.top-bar input {
   padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ===== Page Title ===== */
+.page-title {
+  margin-top: 20px;
+}
+
+.page-title p {
+  color: #777;
   font-size: 14px;
 }
 
-/* ===== SUMMARY CARDS ===== */
-.summary {
+/* ===== Filters ===== */
+.filters {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 12px;
+  margin: 20px 0;
 }
 
-.summary-card {
-  background-color: #ffffff;
-  padding: 20px;
-  flex: 1;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.filters input,
+.filters select,
+.export-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
 }
 
-.summary-card p:first-child {
-  color: #6b7280;
-  margin-bottom: 10px;
+/* ===== Stats Cards ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.summary-card p:last-child {
-  font-size: 24px;
-  font-weight: bold;
-  color: #111827;
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #eee;
 }
 
-/* ===== TABLE ===== */
-.attendance-table {
+.card span {
+  font-size: 14px;
+  color: #777;
+}
+
+.card h3 {
+  margin-top: 8px;
+}
+
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: #2563eb;
+}
+
+/* ===== Table ===== */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.attendance-table th,
-.attendance-table td {
-  padding: 12px 15px;
+thead {
+  background: #2f7cf6;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #eee;
 }
 
-.attendance-table th {
-  background-color: #e5e7eb;
-  color: #111827;
-  font-weight: bold;
+td label {
+  margin-right: 10px;
+  font-size: 14px;
 }
 
-.attendance-table tr:hover {
-  background-color: #f9fafb;
+.absent {
+  margin-left: 8px;
 }
 
-/* ===== STATUS COLORS ===== */
-.status-present {
-  color: #16a34a;
-  font-weight: bold;
+/* ===== Bottom Buttons ===== */
+.bottom-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
-.status-absent {
-  color: #dc2626;
-  font-weight: bold;
+.cancel-btn {
+  padding: 10px 16px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* ===== NO RECORDS ===== */
-.no-records {
-  text-align: center;
-  padding: 15px;
-  color: #6b7280;
+.save-btn {
+  padding: 10px 16px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #1e4fd8;
 }
