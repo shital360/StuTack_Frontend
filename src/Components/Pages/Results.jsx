@@ -2,14 +2,14 @@ import { useState } from "react";
 // import "../Style/Result.css";
 
 const studentsData = [
-  { roll: "2024001", name: "Aarav Sharma", class: "10-A", total: 500, obtained: 465, percentage: 93, grade: "A+", status: "Pass" },
-  { roll: "2024002", name: "Priya Patel", class: "10-A", total: 500, obtained: 445, percentage: 89, grade: "A", status: "Pass" },
-  { roll: "2024003", name: "Rohan Kumar", class: "10-B", total: 500, obtained: 420, percentage: 84, grade: "A", status: "Pass" },
-  { roll: "2024004", name: "Ananya Singh", class: "10-A", total: 500, obtained: 395, percentage: 79, grade: "B+", status: "Pass" },
-  { roll: "2024005", name: "Vikram Reddy", class: "10-B", total: 500, obtained: 360, percentage: 72, grade: "B", status: "Pass" },
-  { roll: "2024006", name: "Sneha Gupta", class: "10-C", total: 500, obtained: 335, percentage: 67, grade: "B", status: "Pass" },
-  { roll: "2024007", name: "Arjun Mehta", class: "10-C", total: 500, obtained: 295, percentage: 59, grade: "C", status: "Pass" },
-  { roll: "2024008", name: "Ishita Verma", class: "10-B", total: 500, obtained: 180, percentage: 36, grade: "F", status: "Fail" },
+  { roll: "1", name: "Aarav Sharma", class: "10-A", total: 500, obtained: 465, percentage: 93, grade: "A+", status: "Pass" },
+  { roll: "2", name: "Priya Patel", class: "10-A", total: 500, obtained: 445, percentage: 89, grade: "A", status: "Pass" },
+  { roll: "3", name: "Rohan Kumar", class: "10-B", total: 500, obtained: 420, percentage: 84, grade: "A", status: "Pass" },
+  { roll: "4", name: "Ananya Singh", class: "10-A", total: 500, obtained: 395, percentage: 79, grade: "B+", status: "Pass" },
+  { roll: "5", name: "Vikram Reddy", class: "10-B", total: 500, obtained: 360, percentage: 72, grade: "B", status: "Pass" },
+  { roll: "6", name: "Sneha Gupta", class: "10-C", total: 500, obtained: 335, percentage: 67, grade: "B", status: "Pass" },
+  { roll: "7", name: "Arjun Mehta", class: "10-C", total: 500, obtained: 295, percentage: 59, grade: "C", status: "Pass" },
+  { roll: "8", name: "Ishita Verma", class: "10-B", total: 500, obtained: 180, percentage: 36, grade: "F", status: "Fail" },
 ];
 
 export default function StudentResults() {

@@ -6,12 +6,14 @@ import Login from "./Components/Pages/Login";
 import Register from "./Components/Pages/Register";
 import Dashboard from "./Components/Pages/Dashboard";
 import Students from "./Components/Pages/Students";
-import Results from "./Components/Pages/Results";
+// import Results from "./Components/Pages/Results";
 import Courses from "./Components/Pages/Courses";
 import AddCourse from "./Components/Pages/AddCourse";
 import EditCourse from "./Components/Pages/EditCourse";
 import Attendance from "./Components/Pages/Attendance";
 import Profile from "./Components/Pages/Profile";
+import ProtectedResults from "./Components/Protected/ProtectedResults";
+
 
 function App() {
   const [courses, setCourses] = useState([
@@ -31,7 +33,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/students" element={<Students />} />
         <Route path="/attendance" element={<Attendance />} />
-        <Route path="/results" element={<Results />} />
+        {/* <Route path="/results" element={<Results />} /> */}
         <Route path="/profile" element={<Profile />} />
 
         <Route
@@ -46,6 +48,8 @@ function App() {
           path="/courses/edit/:code"
           element={<EditCourse courses={courses} setCourses={setCourses} />}
         />
+         {/* ✅ Protected Results route */}
+        <Route path="/results" element={<ProtectedResults />} />
       </Routes>
     </BrowserRouter>
   );

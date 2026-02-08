@@ -1,4 +1,3 @@
-
 /* ===== FULL PAGE BACKGROUND ===== */
 .login-page {
   min-height: 100vh;
@@ -11,9 +10,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px; /* prevents card from touching screen edges */
+  padding: 16px;
   box-sizing: border-box;
-  overflow-y: auto; /* allows scrolling on small screens */
+  overflow-y: auto;
 }
 
 /* ===== LOGIN CARD ===== */
@@ -36,6 +35,7 @@
 .container h2 {
   color: white;
   margin-bottom: 20px;
+  font-size: 26px;
 }
 
 .container input {
@@ -44,7 +44,6 @@
   margin-bottom: 15px;
   border: none;
   border-radius: 6px;
-  box-sizing: border-box;
 }
 
 .container button {
@@ -81,35 +80,66 @@
   cursor: pointer;
 }
 
-/* ===== MEDIA QUERIES ===== */
+/* ================= MEDIA QUERIES ================= */
 
-/* Tablets & small laptops */
+/* Large Tablets / Small Laptops */
+@media (max-width: 1024px) {
+  .container {
+    width: 340px;
+    padding: 28px;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .container {
     width: 300px;
-    padding: 25px;
+    padding: 24px;
   }
-  .container h2 { font-size: 24px; }
+
+  .container h2 {
+    font-size: 22px;
+  }
+
   .container input,
-  .container button { padding: 10px; }
-  .eye-icon { width: 20px; right: 10px; }
+  .container button {
+    padding: 10px;
+  }
+
+  .eye-icon {
+    width: 20px;
+  }
 }
 
-/* Mobile devices */
+/* Mobile Devices */
 @media (max-width: 480px) {
   .login-page {
-    padding: 10px;
-    align-items: flex-start; /* moves card slightly up */
+    align-items: flex-start;
+    padding-top: 30px;
   }
 
   .container {
-    width: 100%; /* full width on tiny screens */
+    width: 100%;
     padding: 20px;
+    border-radius: 10px;
   }
 
-  .container h2 { font-size: 20px; }
+  .container h2 {
+    font-size: 20px;
+  }
+
   .container input,
-  .container button { padding: 10px; font-size: 14px; }
-  .container p { font-size: 14px; }
-  .eye-icon { width: 18px; right: 8px; }
+  .container button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .container p {
+    font-size: 14px;
+  }
+
+  .eye-icon {
+    width: 18px;
+    right: 8px;
+  }
 }
