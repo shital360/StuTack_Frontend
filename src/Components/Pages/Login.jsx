@@ -8,24 +8,50 @@ import bg from "../../assets/login.png";
 
 function Login() {
   const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState("student"); // student/admin select
-  const [roll, setRoll] = useState(""); // student roll
-  const [username, setUsername] = useState(""); // admin email
-  const [password, setPassword] = useState(""); // admin password
+  const [role, setRole] = useState("student");
+
+  // student
+  const [roll, setRoll] = useState("");
+
+  // admin
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
+    /* ================= STUDENT LOGIN ================= */
     if (role === "student") {
       if (roll.trim() === "") {
         alert("Please enter roll number");
         return;
       }
-      // save student role & roll
-      localStorage.setItem("role", "student");
-      localStorage.setItem("roll", roll.trim());
-      navigate("/results"); // student page
-    } else {
-      // admin login validation
+
+      try {
+        const res = await fetch(
+          `http://localhost:5000/students/${roll.trim()}`
+        );
+
+        if (!res.ok) {
+          alert("Invalid roll number");
+          return;
+        }
+
+        const student = await res.json();
+
+        // ✅ valid student
+        localStorage.setItem("role", "student");
+        localStorage.setItem("rollNo", student.rollNo);
+
+        navigate("/student"); // 🔥 student dashboard
+      } catch (err) {
+        console.error(err);
+        alert("Server error");
+      }
+    }
+
+    /* ================= ADMIN LOGIN ================= */
+    else {
       if (username.trim() === "" || password.trim() === "") {
         alert("Please enter email & password");
         return;
@@ -42,11 +68,10 @@ function Login() {
         });
 
         const data = await res.json();
-        console.log("LOGIN RESPONSE:", data);
 
         if (data.success) {
           localStorage.setItem("role", "admin");
-          navigate("/dashboard"); // admin page
+          navigate("/dashboard");
         } else {
           alert(data.message || "Login failed");
         }
@@ -71,7 +96,6 @@ function Login() {
         paddingLeft: "150px",
       }}
     >
-      {/* Login Card */}
       <div
         style={{
           width: "360px",
@@ -102,24 +126,22 @@ function Login() {
 
         {/* STUDENT ROLL */}
         {role === "student" && (
-          <>
-            <input
-              type="text"
-              placeholder="Roll Number"
-              value={roll}
-              onChange={(e) => setRoll(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "12px",
-                marginBottom: "15px",
-                border: "none",
-                borderRadius: "6px",
-              }}
-            />
-          </>
+          <input
+            type="text"
+            placeholder="Roll Number"
+            value={roll}
+            onChange={(e) => setRoll(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "15px",
+              border: "none",
+              borderRadius: "6px",
+            }}
+          />
         )}
 
-        {/* ADMIN EMAIL/PASSWORD */}
+        {/* ADMIN EMAIL / PASSWORD */}
         {role === "admin" && (
           <>
             <input
@@ -135,6 +157,7 @@ function Login() {
                 borderRadius: "6px",
               }}
             />
+
             <div style={{ position: "relative" }}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -152,7 +175,7 @@ function Login() {
               />
               <img
                 src={showPassword ? eyeOff : eye}
-                alt="toggle visibility"
+                alt="toggle"
                 onClick={() => setShowPassword(!showPassword)}
                 style={{
                   position: "absolute",

@@ -1,13 +1,11 @@
 import { Navigate } from "react-router-dom";
-import Results from "../Pages/Results";
 
-export default function ProtectedResults() {
+export default function ProtectedStudent({ children }) {
   const role = localStorage.getItem("role");
 
-  // If not logged in, redirect
-  if (!role) {
+  if (role !== "student") {
     return <Navigate to="/login" replace />;
   }
 
-  return <Results />;
+  return children;
 }

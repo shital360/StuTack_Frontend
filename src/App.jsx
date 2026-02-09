@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
+// --- Admin Pages ---
 import Landing from "./Components/Pages/Landing";
 import Login from "./Components/Pages/Login";
 import Register from "./Components/Pages/Register";
 import Dashboard from "./Components/Pages/Dashboard";
 import Students from "./Components/Pages/Students";
-// import Results from "./Components/Pages/Results";
 import Courses from "./Components/Pages/Courses";
 import AddCourse from "./Components/Pages/AddCourse";
 import EditCourse from "./Components/Pages/EditCourse";
@@ -14,6 +14,14 @@ import Attendance from "./Components/Pages/Attendance";
 import Profile from "./Components/Pages/Profile";
 import ProtectedResults from "./Components/Protected/ProtectedResults";
 
+// --- Student Pages & Layout ---
+import StudentLayout from "./Components/Layout/StudentLayout";
+import ProtectedStudent from "./Components/Protected/ProtectedStudent";
+import StudentDashboard from "./Components/Pages/Student/Dashboard";
+import MyResults from "./Components/Pages/Student/MyResults";
+import MyAttendance from "./Components/Pages/Student/MyAttendance";
+import MyCourses from "./Components/Pages/Student/MyCourses";
+import StudentProfile from "./Components/Pages/Student/Profile";
 
 function App() {
   const [courses, setCourses] = useState([
@@ -27,29 +35,36 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* ------------------- COMMON ------------------- */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* ------------------- ADMIN ------------------- */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/students" element={<Students />} />
         <Route path="/attendance" element={<Attendance />} />
-        {/* <Route path="/results" element={<Results />} /> */}
         <Route path="/profile" element={<Profile />} />
-
-        <Route
-          path="/courses"
-          element={<Courses courses={courses} setCourses={setCourses} />}
-        />
-        <Route
-          path="/courses/add"
-          element={<AddCourse courses={courses} setCourses={setCourses} />}
-        />
-        <Route
-          path="/courses/edit/:code"
-          element={<EditCourse courses={courses} setCourses={setCourses} />}
-        />
-         {/* ✅ Protected Results route */}
+        <Route path="/courses" element={<Courses courses={courses} setCourses={setCourses} />} />
+        <Route path="/courses/add" element={<AddCourse courses={courses} setCourses={setCourses} />} />
+        <Route path="/courses/edit/:code" element={<EditCourse courses={courses} setCourses={setCourses} />} />
         <Route path="/results" element={<ProtectedResults />} />
+
+        {/* ------------------- STUDENT ------------------- */}
+        <Route
+          path="/student"
+          element={
+            <ProtectedStudent>
+              <StudentLayout />
+            </ProtectedStudent>
+          }
+        >
+          <Route index element={<StudentDashboard />} />
+          <Route path="results" element={<MyResults />} />
+          <Route path="attendance" element={<MyAttendance />} />
+          <Route path="courses" element={<MyCourses />} />
+          <Route path="profile" element={<StudentProfile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
