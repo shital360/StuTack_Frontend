@@ -1,114 +1,114 @@
-.results-page {
+.results-container {
   padding: 30px;
   background: #f9fafb;
+  min-height: 100vh;
 }
 
-.subtitle {
+.results-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.results-subtitle {
   color: #6b7280;
   margin-bottom: 20px;
 }
 
-/* Tabs */
-.tabs {
-  display: inline-flex;
+.filter-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.status-tabs {
   background: #eef2f7;
   border-radius: 30px;
   padding: 5px;
-  margin-bottom: 20px;
 }
 
-.tabs button {
+.tab-btn {
   border: none;
   padding: 8px 18px;
   border-radius: 20px;
-  background: transparent;
   cursor: pointer;
-  font-weight: 500;
+  background: transparent;
 }
 
-.tabs button.active {
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+.active-tab {
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Table */
+.class-filter {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
 .table-wrapper {
-  background: #fff;
+  background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-table {
+.results-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 14px 16px;
+.results-table th {
+  background: #2c3e50;
+  color: white;
+  padding: 14px;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
 }
 
-th {
-  background: #f9fafb;
-  font-size: 14px;
-  font-weight: 600;
+.results-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
 }
 
-tr:last-child td {
-  border-bottom: none;
-}
-
-/* Status */
-.status {
+.status-pass {
+  background: #111827;
+  color: white;
   padding: 5px 12px;
   border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
 }
 
-.status.pass {
-  background: #111827;
-  color: #fff;
-}
-
-.status.fail {
+.status-fail {
   background: #dc2626;
-  color: #fff;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 12px;
 }
 
-/* Grade */
-.grade {
-  padding: 5px 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 13px;
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.grade.Aplus,
-.grade.A {
-  background: #111827;
-  color: #fff;
+.save-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 6px;
+  cursor: pointer;
 }
 
-.grade.Bplus,
-.grade.B {
+.cancel-btn {
   background: #e5e7eb;
-}
-
-.grade.C {
-  background: #f3f4f6;
-}
-
-.grade.F {
-  background: #dc2626;
-  color: #fff;
-}
-
-/* Actions */
-.actions {
-  font-size: 18px;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
 }

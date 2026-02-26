@@ -1,120 +1,142 @@
 import { useState } from "react";
-// import "../Style/Result.css";
+import "../Style/Landing.css";
 
-const studentsData = [
-  { roll: "1", name: "Aarav Sharma", class: "10-A", total: 500, obtained: 465, percentage: 93, grade: "A+", status: "Pass" },
-  { roll: "2", name: "Priya Patel", class: "10-A", total: 500, obtained: 445, percentage: 89, grade: "A", status: "Pass" },
-  { roll: "3", name: "Rohan Kumar", class: "10-B", total: 500, obtained: 420, percentage: 84, grade: "A", status: "Pass" },
-  { roll: "4", name: "Ananya Singh", class: "10-A", total: 500, obtained: 395, percentage: 79, grade: "B+", status: "Pass" },
-  { roll: "5", name: "Vikram Reddy", class: "10-B", total: 500, obtained: 360, percentage: 72, grade: "B", status: "Pass" },
-  { roll: "6", name: "Sneha Gupta", class: "10-C", total: 500, obtained: 335, percentage: 67, grade: "B", status: "Pass" },
-  { roll: "7", name: "Arjun Mehta", class: "10-C", total: 500, obtained: 295, percentage: 59, grade: "C", status: "Pass" },
-  { roll: "8", name: "Ishita Verma", class: "10-B", total: 500, obtained: 180, percentage: 36, grade: "F", status: "Fail" },
+const initialData = [
+  // (timro initialData same rakhne – change garna pardaina)
 ];
 
 export default function StudentResults() {
-  const [filter, setFilter] = useState("ALL");
+  const [students, setStudents] = useState(initialData);
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [classFilter, setClassFilter] = useState("ALL");
+  const [editRoll, setEditRoll] = useState(null);
+  const [editData, setEditData] = useState({});
 
-  const filteredStudents =
-    filter === "ALL"
-      ? studentsData
-      : studentsData.filter((s) => s.status === filter);
+  const classes = ["ALL", ...new Set(initialData.map(s => s.class))];
 
-  // Function to download a student's data as CSV
-  const downloadStudentCSV = (student) => {
-    const headers = ["Roll No.", "Student Name", "Class", "Total Marks", "Obtained", "Percentage", "Grade", "Status"];
-    const row = [student.roll, student.name, student.class, student.total, student.obtained, student.percentage, student.grade, student.status];
+  const filteredStudents = students
+    .filter(s => statusFilter === "ALL" || s.status === statusFilter)
+    .filter(s => classFilter === "ALL" || s.class === classFilter);
 
-    const csvContent = "data:text/csv;charset=utf-8," + [headers, row].map((e) => e.join(",")).join("\n");
-
-    const link = document.createElement("a");
-    link.setAttribute("href", encodeURI(csvContent));
-    link.setAttribute("download", `${student.name.replace(" ", "_")}_result.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleEdit = (s) => {
+    setEditRoll(s.roll);
+    setEditData({ ...s });
   };
 
+  const handleSave = (roll) => {
+    setStudents(students.map((s) => s.roll === roll ? { ...s, ...editData } : s));
+    setEditRoll(null);
+  };
+
+  const handleCancel = () => setEditRoll(null);
+
   return (
-    <div className="results-page">
-      <h2>Student Results</h2>
-      <p className="subtitle">
+    <div className="results-container">
+
+      <h2 className="results-title">Student Results</h2>
+      <p className="results-subtitle">
         View and manage all student examination results
       </p>
 
-      {/* Tabs */}
-      <div className="tabs">
-        <button
-          className={filter === "ALL" ? "active" : ""}
-          onClick={() => setFilter("ALL")}
+      {/* Filters */}
+      <div className="filter-row">
+
+        <div className="status-tabs">
+          {["ALL", "Pass", "Fail"].map((f) => (
+            <button
+              key={f}
+              onClick={() => setStatusFilter(f)}
+              className={`tab-btn ${statusFilter === f ? "active-tab" : ""}`}
+            >
+              {f === "ALL" ? "All Students" : f === "Pass" ? "Passed" : "Failed"}
+            </button>
+          ))}
+        </div>
+
+        <select
+          value={classFilter}
+          onChange={(e) => setClassFilter(e.target.value)}
+          className="class-filter"
         >
-          All Students
-        </button>
-        <button
-          className={filter === "Pass" ? "active" : ""}
-          onClick={() => setFilter("Pass")}
-        >
-          Passed
-        </button>
-        <button
-          className={filter === "Fail" ? "active" : ""}
-          onClick={() => setFilter("Fail")}
-        >
-          Failed
-        </button>
+          {classes.map(c => (
+            <option key={c} value={c}>
+              {c === "ALL" ? "All Classes" : `Class ${c}`}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Table */}
       <div className="table-wrapper">
-        <table>
+        <table className="results-table">
           <thead>
             <tr>
-              <th>Roll No.</th>
-              <th>Student Name</th>
-              <th>Class</th>
-              <th>Total Marks</th>
-              <th>Obtained</th>
-              <th>Percentage</th>
-              <th>Grade</th>
-              <th>Status</th>
-              <th>Actions</th>
+              {["Roll No.", "Student Name", "Class", "Total", "Obtained", "Percentage", "Grade", "Status", "Actions"]
+                .map((h) => <th key={h}>{h}</th>)}
             </tr>
           </thead>
-
           <tbody>
-            {filteredStudents.map((s) => (
-              <tr key={s.roll}>
-                <td>{s.roll}</td>
-                <td>{s.name}</td>
-                <td>{s.class}</td>
-                <td>{s.total}</td>
-                <td>{s.obtained}</td>
-                <td>{s.percentage}%</td>
-                <td>
-                  <span className={`grade ${s.grade}`}>
-                    {s.grade}
-                  </span>
-                </td>
-                <td>
-                  <span
-                    className={`status ${
-                      s.status === "Pass" ? "pass" : "fail"
-                    }`}
-                  >
-                    {s.status}
-                  </span>
-                </td>
-                <td className="actions">
-                  {/* Clickable download */}
-                  <span
-                    style={{ cursor: "pointer" }}
-                    onClick={() => downloadStudentCSV(s)}
-                  >
-                    ⬇️
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {filteredStudents.map((s) => {
+              const isEditing = editRoll === s.roll;
+              return (
+                <tr key={s.roll}>
+                  <td>{s.roll}</td>
+
+                  <td>
+                    {isEditing
+                      ? <input value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} />
+                      : s.name}
+                  </td>
+
+                  <td>
+                    {isEditing
+                      ? <input value={editData.class} onChange={(e) => setEditData({ ...editData, class: e.target.value })} />
+                      : s.class}
+                  </td>
+
+                  <td>{s.total}</td>
+
+                  <td>
+                    {isEditing
+                      ? <input value={editData.obtained} onChange={(e) => setEditData({ ...editData, obtained: e.target.value })} />
+                      : s.obtained}
+                  </td>
+
+                  <td>{s.percentage}%</td>
+
+                  <td>
+                    {isEditing
+                      ? (
+                        <select value={editData.grade}
+                          onChange={(e) => setEditData({ ...editData, grade: e.target.value })}>
+                          {["A+", "A", "B+", "B", "C", "D", "F"].map((g) =>
+                            <option key={g}>{g}</option>
+                          )}
+                        </select>
+                      )
+                      : s.grade}
+                  </td>
+
+                  <td>
+                    <span className={s.status === "Pass" ? "status-pass" : "status-fail"}>
+                      {s.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    {isEditing ? (
+                      <>
+                        <button className="save-btn" onClick={() => handleSave(s.roll)}>Save</button>
+                        <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                      </>
+                    ) : (
+                      <button className="edit-btn" onClick={() => handleEdit(s)}>Edit</button>
+                    )}
+                  </td>
+
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

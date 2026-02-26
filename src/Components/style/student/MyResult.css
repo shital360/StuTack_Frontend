@@ -1,0 +1,56 @@
+/* MyResults Page Styles */
+.results-page {
+  padding: 30px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.results-page h2 {
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.results-page p {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.results-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.subject-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.subject-name {
+  font-size: 18px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.subject-marks {
+  font-size: 24px;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #95a5a6;
+  font-size: 18px;
+}

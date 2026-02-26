@@ -7,18 +7,16 @@ const Profile = () => {
   const [profile, setProfile] = useState({
     name: "Shital Dangol",
     email: "shitaldangol@gmail.com",
-    role: "Student",
+    role: "Teacher",
   });
 
-  // 🔥 IMPORTANT STATES
-  const [avatar, setAvatar] = useState(null);       // saved image
-  const [tempAvatar, setTempAvatar] = useState(null); // editing image
+  const [avatar, setAvatar] = useState(null);
+  const [tempAvatar, setTempAvatar] = useState(null);
 
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  // image preview only
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -28,20 +26,9 @@ const Profile = () => {
     }
   };
 
-  const handleEdit = () => {
-    setTempAvatar(avatar); // sync old image
-    setIsEditing(true);
-  };
-
-  const handleSave = () => {
-    setAvatar(tempAvatar); // ✅ save image
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setTempAvatar(avatar); // ❌ revert image
-    setIsEditing(false);
-  };
+  const handleEdit   = () => { setTempAvatar(avatar); setIsEditing(true); };
+  const handleSave   = () => { setAvatar(tempAvatar); setIsEditing(false); };
+  const handleCancel = () => { setTempAvatar(avatar); setIsEditing(false); };
 
   const displayImage = isEditing ? tempAvatar || avatar : avatar;
 
@@ -63,7 +50,6 @@ const Profile = () => {
               ) : (
                 <div className="avatar">👤</div>
               )}
-
               {isEditing && (
                 <input
                   type="file"
@@ -73,7 +59,6 @@ const Profile = () => {
                 />
               )}
             </label>
-
             {isEditing && <span className="change-text">Change Photo</span>}
           </div>
 
@@ -88,20 +73,8 @@ const Profile = () => {
             ) : (
               <h2 className="name">{profile.name}</h2>
             )}
-
-            {isEditing ? (
-              <select
-                name="role"
-                value={profile.role}
-                onChange={handleChange}
-                className="role-select"
-              >
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-              </select>
-            ) : (
-              <p className="role">{profile.role}</p>
-            )}
+            {/* Role — fixed as Teacher, no dropdown */}
+            <p className="role">Teacher</p>
           </div>
         </div>
 
@@ -109,6 +82,7 @@ const Profile = () => {
 
         <h3 className="section-title">Personal Information</h3>
 
+        {/* Full Name */}
         <div className="info-row">
           <div className="icon">👤</div>
           <div>
@@ -126,6 +100,7 @@ const Profile = () => {
           </div>
         </div>
 
+        {/* Email */}
         <div className="info-row">
           <div className="icon">✉️</div>
           <div>
@@ -143,23 +118,12 @@ const Profile = () => {
           </div>
         </div>
 
+        {/* Role — fixed, no dropdown */}
         <div className="info-row">
           <div className="icon">🛡️</div>
           <div>
             <small>Role</small>
-            {isEditing ? (
-              <select
-                name="role"
-                value={profile.role}
-                onChange={handleChange}
-                className="role-select"
-              >
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-              </select>
-            ) : (
-              <p>{profile.role}</p>
-            )}
+            <p>Teacher</p>
           </div>
         </div>
 
@@ -171,12 +135,8 @@ const Profile = () => {
           </button>
         ) : (
           <div className="btn-group">
-            <button className="save-btn" onClick={handleSave}>
-              Save
-            </button>
-            <button className="cancel-btn" onClick={handleCancel}>
-              Cancel
-            </button>
+            <button className="save-btn" onClick={handleSave}>Save</button>
+            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
           </div>
         )}
       </div>

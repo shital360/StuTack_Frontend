@@ -1,49 +1,40 @@
-import { useNavigate } from "react-router-dom";
-// import "../../style/Dashboard.css";
-
 function Dashboard() {
-  const navigate = useNavigate();
-
   return (
-    <div className="dashboard-container">
-      <div className="sidebar">
-        <h2>SIMS</h2>
-        <ul>
-          <li onClick={() => navigate("/dashboard")}>Dashboard</li>
-          <li onClick={() => navigate("/students")}>Students</li>
-          <li onClick={() => navigate("/courses")}>Courses</li>
-          <li onClick={() => navigate("/attendance")}>Attendance</li>
-          <li onClick={() => navigate("/results")}>Results</li>
-          <li onClick={() => navigate("/profile")}>Profile</li>
-          <li onClick={() => navigate("/")}>Logout</li>
-        </ul>
-      </div>
-      <div className="main-content">
-        <h1>Welcome, Admin</h1>
-        <p>Manage student information efficiently.</p>
+    <div style={{ padding: "30px" }}>
+      <h1 style={{ fontSize: "28px", color: "#2c3e50", marginBottom: "5px" }}>
+        Welcome, Admin
+      </h1>
+      <p style={{ color: "#7f8c8d", marginBottom: "30px", fontSize: "14px" }}>
+        Manage student information efficiently.
+      </p>
 
-        <div className="cards">
-          <div className="card">
-            <h3>Total Students</h3>
-            <p>350</p>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "20px",
+      }}>
+        {[
+          { label: "Total Students",    value: "350" },
+          { label: "Total Classes",     value: "25"  },
+          { label: "New Students Month",value: "8"   },
+          { label: "Active Courses",    value: "12"  },
+        ].map((c) => (
+          <div key={c.label} style={{
+            background: "white", padding: "25px 20px",
+            borderRadius: "10px", textAlign: "center",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.08)",
+          }}>
+            <h3 style={{ color: "#7f8c8d", fontSize: "14px", fontWeight: "500", marginBottom: "12px" }}>
+              {c.label}
+            </h3>
+            <p style={{ fontSize: "36px", fontWeight: "bold", color: "#3498db", margin: 0 }}>
+              {c.value}
+            </p>
           </div>
-          <div className="card">
-            <h3>Total Classes</h3>
-            <p>25</p>
-          </div>
-          <div className="card">
-            <h3>New Students Month</h3>
-            <p>8</p>
-          </div>
-          <div className="card">
-            <h3>Active Courses</h3>
-            <p>12</p>
-          </div>
-        </div>
-        
+        ))}
       </div>
     </div>
   );
 }
 
-export default Dashboard; 
+export default Dashboard;

@@ -1,86 +1,45 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  GraduationCap,
-} from "lucide-react";
+import { Plus, Pencil, Trash2, GraduationCap, Check, X } from "lucide-react";
 
-export default function Courses() {
+export default function Courses({ courses = [], setCourses = () => {} }) {
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState("");
+  const [editingCode, setEditingCode] = useState(null);
+  const [editForm, setEditForm] = useState({});
 
-  const courses = [
-    {
-      code: "CS101",
-      name: "Introduction to Computer Science",
-      class: "Computer Science",
-      teacher: "Dr. Sarah Johnson",
-      schedule: "Mon, Wed, Fri 10:00–11:00 AM",
-      enrolled: "28/30",
-      semester: "Spring 2026",
-      full: false,
-    },
-    {
-      code: "MATH201",
-      name: "Calculus II",
-      class: "Mathematics",
-      teacher: "Prof. Michael Chen",
-      schedule: "Tue, Thu 1:00–3:00 PM",
-      enrolled: "22/35",
-      semester: "Spring 2026",
-      full: false,
-    },
-    {
-      code: "ENG150",
-      name: "Academic Writing",
-      class: "English",
-      teacher: "Dr. Emily Brown",
-      schedule: "Mon, Wed, Fri 2:00–3:00 PM",
-      enrolled: "25/25",
-      semester: "Spring 2026",
-      full: true,
-    },
-    {
-      code: "PHYS101",
-      name: "Physics I",
-      class: "Physics",
-      teacher: "Prof. David Lee",
-      schedule: "Tue, Thu 9:00–11:00 AM",
-      enrolled: "35/40",
-      semester: "Spring 2026",
-      full: false,
-    },
-  ];
-
-  // Filter Logic
   const filteredCourses = selectedCourse
     ? courses.filter((c) => c.code === selectedCourse)
     : courses;
 
+  const handleEditClick = (c) => {
+    setEditingCode(c.code);
+    setEditForm({ ...c });
+  };
+
+  const handleSave = () => {
+    setCourses(courses.map(c => c.code === editingCode ? { ...editForm } : c));
+    setEditingCode(null);
+  };
+
+  const handleCancel = () => {
+    setEditingCode(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-6" style={{ padding: "20px 0" }}>
         <div className="p-2 rounded-xl bg-blue-600 text-white">
-          <GraduationCap />
+          <GraduationCap size={32} />
         </div>
         <div>
-          <h1 className="text-xl font-semibold">
-            Student Information Management System
-          </h1>
-          <p className="text-sm text-gray-500">
-            Manage courses and enrollments
-          </p>
+          <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>Student Information Management System</h1>
+          <p className="text-sm text-gray-500" style={{ marginTop: "6px" }}>Manage courses and enrollments</p>
         </div>
       </div>
 
-      {/* Main Card */}
       <div className="bg-white rounded-2xl shadow p-4">
-        {/* Top Bar */}
         <div className="flex items-center justify-between mb-4">
-          {/* Dropdown */}
           <div className="w-72">
             <select
               value={selectedCourse}
@@ -89,14 +48,11 @@ export default function Courses() {
             >
               <option value="">All Courses</option>
               {courses.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.name}
-                </option>
+                <option key={c.code} value={c.code}>{c.name}</option>
               ))}
             </select>
           </div>
 
-          {/* Add Course Button */}
           <button
             onClick={() => navigate("/courses/add")}
             className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm shadow hover:bg-blue-700"
@@ -105,61 +61,85 @@ export default function Courses() {
           </button>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-left text-gray-500 border-b">
               <tr>
                 <th className="py-2">Code</th>
                 <th>Name</th>
-                <th>Class</th>
                 <th>Teacher</th>
-                <th>Schedule</th>
-                <th>Enrolled</th>
-                <th>Semester</th>
-                <th className="text-right">Actions</th>
+                <th>Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredCourses.map((c) => (
-                <tr
-                  key={c.code}
-                  className="border-b last:border-none hover:bg-gray-50"
-                >
-                  <td className="py-3 font-medium">{c.code}</td>
-                  <td>{c.name}</td>
-                  <td>{c.class}</td>
-                  <td>{c.teacher}</td>
-                  <td>{c.schedule}</td>
-                  <td>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                        c.full
-                          ? "bg-red-100 text-red-600"
-                          : "bg-gray-900 text-white"
-                      }`}
-                    >
-                      {c.enrolled}
-                    </span>
-                  </td>
-                  <td>{c.semester}</td>
-                  <td className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <button className="p-1 text-gray-600 hover:text-blue-600">
-                        <Pencil size={16} />
-                      </button>
-                      <button className="p-1 text-gray-600 hover:text-red-600">
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </td>
+                <tr key={c.code} className="border-b last:border-none hover:bg-gray-50">
+                  {editingCode === c.code ? (
+                    <>
+                      <td className="py-3">
+                        <input
+                          value={editForm.code}
+                          onChange={(e) => setEditForm({ ...editForm, code: e.target.value })}
+                          style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "4px 8px", width: "80px" }}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          value={editForm.name}
+                          onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                          style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "4px 8px", width: "150px" }}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          value={editForm.teacher}
+                          onChange={(e) => setEditForm({ ...editForm, teacher: e.target.value })}
+                          style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "4px 8px", width: "150px" }}
+                        />
+                      </td>
+                      <td>
+                        <div style={{ display: "flex", gap: "8px" }}>
+                          <button
+                            onClick={handleSave}
+                            style={{ background: "#22c55e", color: "white", padding: "6px 14px", borderRadius: "6px", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}>
+                            <Check size={14} /> Save
+                          </button>
+                          <button
+                            onClick={handleCancel}
+                            style={{ background: "#6b7280", color: "white", padding: "6px 14px", borderRadius: "6px", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}>
+                            <X size={14} /> Cancel
+                          </button>
+                        </div>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="py-3 font-medium">{c.code}</td>
+                      <td>{c.name}</td>
+                      <td>{c.teacher}</td>
+                      <td>
+                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", gap: "8px" }}>
+                          <button
+                            onClick={() => handleEditClick(c)}
+                            style={{ background: "#2563eb", color: "white", padding: "6px 14px", borderRadius: "6px", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}>
+                            <Pencil size={14} /> Edit
+                          </button>
+                          <button
+                            onClick={() => setCourses(courses.filter(co => co.code !== c.code))}
+                            style={{ background: "#ef4444", color: "white", padding: "6px 14px", borderRadius: "6px", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}>
+                            <Trash2 size={14} /> Delete
+                          </button>
+                        </div>
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))}
 
               {filteredCourses.length === 0 && (
                 <tr>
-                  <td colSpan="8" className="text-center py-6 text-gray-400">
+                  <td colSpan="4" className="text-center py-6 text-gray-400">
                     No course found
                   </td>
                 </tr>

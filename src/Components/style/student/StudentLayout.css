@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.student-layout {
+  display: flex;
+  height: 100vh;
+  background: #ecf0f1;
+}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.student-sidebar {
+  width: 250px;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.student-sidebar ul {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+}
+
+.student-sidebar ul li {
+  margin-bottom: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.student-sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  padding: 13px 15px;
+  display: block;
+  background: #34495e;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.student-sidebar ul li a:hover {
+  background: #1abc9c;
+}
+
+.student-sidebar ul li.active a {
+  background: #1abc9c;
+  font-weight: 600;
+}
+
+.logout-btn {
+  padding: 13px 15px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+/* ══════════════════════════════
+   MAIN CONTENT
+══════════════════════════════ */
+.student-main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background: #ecf0f1;
+}
