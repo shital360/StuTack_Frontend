@@ -1,57 +1,137 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
-const StudentLayout = () => {
+function StudentLayout() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
+  const isActive = (path) => location.pathname === path;
+  const getLinkStyle = (path) =>
+    isActive(path) ? activeLinkStyle : linkStyle;
+
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-
+    <div style={{ display: "flex" }}>
       {/* Sidebar */}
-      <div style={{
-        width: "220px",
-        background: "#2c3e50",
-        color: "white",
-        padding: "24px 16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        flexShrink: 0,
-      }}>
-        <h2 style={{ color: "white", fontSize: "22px", fontWeight: "bold", marginBottom: "24px" }}>SIMS</h2>
+      <div style={sidebarStyle}>
+        <div>
+          <h2 style={logoStyle}>SIMS</h2>
 
-        <nav style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          {[
-            { to: "/student", label: "Dashboard", end: true },
-            { to: "/student/results", label: "My Results" },
-            { to: "/student/attendance", label: "My Attendance" },
-            { to: "/student/courses", label: "My Courses" },
-            { to: "/student/profile", label: "Profile" },
-            { to: "/login", label: "Logout" },
-          ].map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.end}
-              style={({ isActive }) => ({
-                padding: "10px 14px",
-                borderRadius: "8px",
-                color: "white",
-                textDecoration: "none",
-                background: isActive ? "#3498db" : "transparent",
-                fontSize: "14px",
-              })}
+          <div style={menuContainerStyle}>
+            {/* Dashboard */}
+            <p
+              style={getLinkStyle("/student")}
+              onClick={() => navigate("/student")}
             >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+              Dashboard
+            </p>
+
+            {/* Attendance */}
+            <p
+              style={getLinkStyle("/student/attendance")}
+              onClick={() => navigate("/student/attendance")}
+            >
+              My Attendance
+            </p>
+
+            {/* Courses */}
+            <p
+              style={getLinkStyle("/student/courses")}
+              onClick={() => navigate("/student/courses")}
+            >
+              My Courses
+            </p>
+
+            {/* Results (Moved Below Courses) */}
+            <p
+              style={getLinkStyle("/student/results")}
+              onClick={() => navigate("/student/results")}
+            >
+              My Results
+            </p>
+
+            {/* Profile */}
+            <p
+              style={getLinkStyle("/student/profile")}
+              onClick={() => navigate("/student/profile")}
+            >
+              Profile
+            </p>
+          </div>
+        </div>
+
+        {/* Logout Bottom */}
+        <div style={logoutContainerStyle}>
+          <p style={logoutStyle} onClick={handleLogout}>
+            Logout
+          </p>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div style={{ flex: 1, background: "#f5f6f8", overflowY: "auto" }}>
+      <div style={contentStyle}>
         <Outlet />
       </div>
-
     </div>
   );
+}
+
+/* ===== STYLES ===== */
+
+const sidebarStyle = {
+  width: "240px",
+  height: "100vh",
+  backgroundColor: "#34495e",
+  color: "white",
+  padding: "25px 20px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+};
+
+const logoStyle = {
+  fontSize: "22px",
+  fontWeight: "bold",
+  marginBottom: "25px",
+};
+
+const menuContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "14px",
+};
+
+const linkStyle = {
+  cursor: "pointer",
+  fontSize: "15px",
+  padding: "8px 12px",
+  borderRadius: "6px",
+};
+
+const activeLinkStyle = {
+  cursor: "pointer",
+  fontSize: "15px",
+  padding: "8px 12px",
+  backgroundColor: "#3f5870",
+  borderRadius: "6px",
+};
+
+const logoutContainerStyle = {
+  marginBottom: "15px",
+};
+
+const logoutStyle = {
+  cursor: "pointer",
+  fontSize: "15px",
+};
+
+const contentStyle = {
+  flex: 1,
+  backgroundColor: "#f4f6f9",
+  padding: "40px",
 };
 
 export default StudentLayout;

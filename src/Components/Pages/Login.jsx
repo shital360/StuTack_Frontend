@@ -17,7 +17,52 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    // (timro login logic same rakhne)
+    try {
+      const userType = role === "student" ? "Student" : "Admin";
+
+      const payload = {
+        userType,
+        rollNumber: role === "student" ? roll.trim() : undefined,
+        email: role === "admin" ? username.trim() : undefined,
+        password: role === "admin" ? password : undefined,
+      };
+
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      console.log("Login Response:", data);
+
+      if (data.success) {
+        // Save user
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        const userRole = data.role.toLowerCase();
+        localStorage.setItem("role", userRole);
+
+        if (userRole === "student") {
+          // ✅ IMPORTANT FIX (rollNumber, not rollNo)
+          localStorage.setItem("rollNo", data.user.rollNumber);
+
+          navigate("/student");
+        } 
+        else if (userRole === "admin") {
+          navigate("/admin/dashboard");
+        }
+
+      } else {
+        alert(data.message || "Login failed");
+      }
+
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Server error. Please try again.");
+    }
   };
 
   return (

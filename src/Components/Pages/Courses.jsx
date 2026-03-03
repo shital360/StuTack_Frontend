@@ -54,7 +54,7 @@ export default function Courses({ courses = [], setCourses = () => {} }) {
           </div>
 
           <button
-            onClick={() => navigate("/courses/add")}
+            onClick={() => navigate("/admin/courses/add")} // ✅ FIXED
             className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm shadow hover:bg-blue-700"
           >
             <Plus size={16} /> Add Course
