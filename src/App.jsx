@@ -39,7 +39,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* PUBLIC */}
+        {/* PUBLIC ROUTES */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

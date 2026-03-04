@@ -1,9 +1,9 @@
 const resultsData = [
-  { subject: "Mathematics",   total: 100, obtained: 93, grade: "A+", status: "Pass" },
-  { subject: "Science",       total: 100, obtained: 87, grade: "A",  status: "Pass" },
-  { subject: "English",       total: 100, obtained: 79, grade: "B+", status: "Pass" },
-  { subject: "Computer Sci.", total: 100, obtained: 91, grade: "A",  status: "Pass" },
-  { subject: "Physics",       total: 100, obtained: 75, grade: "B",  status: "Pass" },
+  { subject: "English",      total: 100, obtained: 93, grade: "A+", status: "Pass" },
+  { subject: "Nepali",       total: 100, obtained: 87, grade: "A",  status: "Pass" },
+  { subject: "Science",      total: 100, obtained: 79, grade: "B+", status: "Pass" },
+  { subject: "Social",       total: 100, obtained: 91, grade: "A",  status: "Pass" },
+  { subject: "Mathematics",  total: 100, obtained: 75, grade: "B",  status: "Pass" },
 ];
 
 const gradeColor = (g) => {

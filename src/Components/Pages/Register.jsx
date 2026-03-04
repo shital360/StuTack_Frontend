@@ -39,8 +39,9 @@ function Register() {
 
     toast.success("Registration successful 🎉");
 
+    // 🔥 DIRECT ADMIN DASHBOARD
     setTimeout(() => {
-      navigate("/login");   
+      navigate("/admin/dashboard");
     }, 1500);
   };
 
@@ -99,15 +100,9 @@ function Register() {
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
             value={confirmPassword}
-            onChange={(e) =>
-              setConfirmPassword(e.target.value)
-            }
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <span
-            onClick={() =>
-              setShowConfirmPassword(!showConfirmPassword)
-            }
-          >
+          <span onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
             <img
               src={showConfirmPassword ? eyeOff : eye}
               className="eye-icon"
@@ -130,10 +125,7 @@ function Register() {
           </span>
         </p>
 
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-        />
+        <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </div>
   );
